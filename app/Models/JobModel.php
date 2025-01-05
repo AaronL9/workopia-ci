@@ -12,4 +12,8 @@ class JobModel extends Model
     public function getJobs() {
         return $this->findAll();
     }
+
+    public function getJob($id) {
+        return $this->find($id);
+    }
 }
