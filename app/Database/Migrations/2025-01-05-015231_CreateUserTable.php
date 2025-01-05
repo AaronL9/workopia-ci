@@ -23,10 +23,14 @@ class CreateUserTable extends Migration
                 'constraint' => '255',
                 'unique' => true,
             ],
-            'phone' => [
+            'city' => [
                 'type' => 'VARCHAR',
-                'constraint' => '15',
+                'constraint' => '255',
                 'null' => true,
+            ],
+            'password' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',
