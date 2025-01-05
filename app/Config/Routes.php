@@ -14,3 +14,4 @@ $routes->get('jobs/(:segment)', [JobController::class, 'show']);
 // User routes
 $routes->get('/register', [UserController::class, 'register']);
 $routes->get('/login', [UserController::class, 'login']);
+$routes->post('/register', [UserController::class, 'create']);
