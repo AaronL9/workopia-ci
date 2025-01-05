@@ -2,6 +2,7 @@
 
 use App\Controllers\HomeController;
 use App\Controllers\JobController;
+use App\Controllers\UserController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -9,3 +10,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', [HomeController::class, 'index']);
 $routes->get('jobs/(:segment)', [JobController::class, 'show']);
+
+// User routes
+$routes->get('/register', [UserController::class, 'register']);
+$routes->get('/login', [UserController::class, 'login']);
