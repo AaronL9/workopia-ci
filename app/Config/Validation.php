@@ -34,7 +34,7 @@ class Validation extends BaseConfig
      * @var array<string, string>
      */
     public array $templates = [
-        'list'   => 'CodeIgniter\Validation\Views\list',
+        'list' => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
 
@@ -44,14 +44,14 @@ class Validation extends BaseConfig
 
     public array $signup = [
         'name' => [
-            'rules'  => 'required|max_length[30]',
+            'rules' => 'required|max_length[30]',
             'errors' => [
                 'required' => 'You must provide your name.',
                 'max_length' => 'Name cannot exceed 30 characters.',
             ],
         ],
         'email' => [
-            'rules'  => 'required|max_length[254]|valid_email',
+            'rules' => 'required|max_length[254]|valid_email',
             'errors' => [
                 'required' => 'You must provide an email address.',
                 'max_length' => 'Email cannot exceed 254 characters.',
@@ -59,22 +59,33 @@ class Validation extends BaseConfig
             ],
         ],
         'city' => [
-            'rules'  => 'required',
+            'rules' => 'required',
             'errors' => [
                 'required' => 'You must provide your city.',
             ],
         ],
         'password' => [
-            'rules'  => 'required|max_length[255]',
+            'rules' => 'required|max_length[255]',
             'errors' => [
                 'required' => 'You must provide a password.',
                 'max_length' => 'Password cannot exceed 255 characters.',
             ],
         ],
         'password_confirmation' => [
-            'rules'  => 'matches[password]',
+            'rules' => 'matches[password]',
             'errors' => [
                 'matches' => 'Password does not match.',
+            ],
+        ],
+    ];
+
+    public array $login = [
+        'email' => [
+            'rules' => 'required|max_length[254]|valid_email',
+            'errors' => [
+                'required' => 'You must provide an email address.',
+                'max_length' => 'Email cannot exceed 254 characters.',
+                'valid_email' => 'Please check the Email field. It does not appear to be valid.',
             ],
         ],
     ];

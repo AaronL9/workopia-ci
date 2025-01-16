@@ -27,7 +27,7 @@ class JobSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'), // Current timestamp
             ],
             [
-                'user_id' => 2, // Assuming user with ID 2 exists
+                'user_id' => 1, // Assuming user with ID 2 exists
                 'title' => 'Product Manager',
                 'description' => 'Oversee the development and marketing of products.',
                 'salary' => 90000,
@@ -43,7 +43,7 @@ class JobSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'), // Current timestamp
             ],
             [
-                'user_id' => 2, // Assuming user with ID 3 exists
+                'user_id' => 1, // Assuming user with ID 3 exists
                 'title' => 'Data Analyst',
                 'description' => 'Analyze data to help the company make informed decisions.',
                 'salary' => 70000,
@@ -59,7 +59,7 @@ class JobSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'), // Current timestamp
             ],
             [
-                'user_id' => 2, // Assuming user with ID 4 exists
+                'user_id' => 1, // Assuming user with ID 4 exists
                 'title' => 'UX/UI Designer',
                 'description' => 'Design user-friendly interfaces and improve user experience.',
                 'salary' => 75000,

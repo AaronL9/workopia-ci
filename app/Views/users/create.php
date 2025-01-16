@@ -30,7 +30,7 @@
           <input
         type="text"
         name="city"
-        placeholder="City"
+        placeholder="city"
         class="w-full px-4 py-2 border rounded focus:outline-none"
         value="<?= set_value("city") ?>"
           />

@@ -15,3 +15,4 @@ $routes->get('jobs/(:segment)', [JobController::class, 'show']);
 $routes->get('/register', [UserController::class, 'register']);
 $routes->get('/login', [UserController::class, 'login']);
 $routes->post('/register', [UserController::class, 'create']);
+$routes->post('/login', [UserController::class, 'authenticate']);

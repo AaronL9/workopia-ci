@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class UserController extends BaseController
@@ -13,13 +14,46 @@ class UserController extends BaseController
         return view('users/create', ['errors' => $errors]);
     }
 
-    public function login()
+    public function login($errors = null)
     {
         helper('form');
-        return view('users/login');
+        return view('users/login', ['errors' => $errors]);
     }
 
-    public function create() {
+    public function authenticate()
+    {
+        $data = $this->request->getPost([
+            'email',
+            'password'
+        ]);
+
+        if (!$this->validateData($data, 'login')) {
+            $errors = $this->validator->getErrors();
+            return $this->login($errors);
+        }
+
+        $userModel = model(UserModel::class);
+
+        $user = $userModel->where('email', $data['email'])->first();
+
+        if ($user && password_verify($data['password'], $user->password)) {
+            $session = session();
+            $session->set([
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ]
+            ]);
+
+            return redirect()->to('/');
+        }
+
+        return $this->login(['error' => 'Invalid credentials']);
+    }
+
+    public function create()
+    {
         $data = $this->request->getPost([
             'name',
             'email',
@@ -28,13 +62,31 @@ class UserController extends BaseController
             'password_confirmation'
         ]);
 
-        $validation = service('validation');
-
-        if (!$validation->run($data, 'signup')) {
-            $errors = $validation->getErrors();
+        if (!$this->validateData($data, 'signup')) {
+            $errors = $this->validator->getErrors();
             return $this->register($errors);
         }
 
-        return "hello";
+        $validatedData = $this->validator->getValidated();
+
+        $validatedData['password'] = password_hash($validatedData['password'], PASSWORD_DEFAULT);
+        unset($validatedData['password_confirmation']);
+
+        $userModel = model(UserModel::class);
+
+        $userModel->save($validatedData);
+
+        $userId = $userModel->getInsertID();
+
+        $user = [
+            'id' => $userId,
+            'name' => $validatedData['name'],
+        ];
+
+        $session = service('session');
+
+        $session->set(['user' => $user]);
+
+        return redirect('/');
     }
 }
