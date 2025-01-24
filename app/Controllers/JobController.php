@@ -13,7 +13,8 @@ class JobController extends BaseController
         //
     }
 
-    public function show(string $id) {
+    public function show(string $id)
+    {
         helper('string_helper');
 
         $jobModel = model(JobModel::class);
@@ -21,5 +22,15 @@ class JobController extends BaseController
         $data = $jobModel->getJob($id);
 
         return view('joblistings/show', ['listing' => $data]);
+    }
+
+    public function create()
+    {
+        helper('form');
+        return view('joblistings/create.php');
+    }
+
+    public function store() {
+        
     }
 }

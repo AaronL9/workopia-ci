@@ -9,11 +9,13 @@ class JobModel extends Model
     protected $table = 'job';
     protected $returnType = 'object';
 
-    public function getJobs() {
+    public function getJobs()
+    {
         return $this->findAll();
     }
 
-    public function getJob($id) {
+    public function getJob($id)
+    {
         return $this->find($id);
     }
 }
