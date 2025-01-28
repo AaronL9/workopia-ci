@@ -17,5 +17,7 @@ $routes->post('/register', [UserController::class, 'create']);
 $routes->post('/login', [UserController::class, 'authenticate']);
 
 // Listing routes
+$routes->get('jobs', [JobController::class, 'index']);
 $routes->get('jobs/create', [JobController::class, 'create']);
 $routes->get('jobs/(:segment)', [JobController::class, 'show']);
+$routes->post('create-job', [JobController::class, 'store']);

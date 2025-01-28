@@ -10,7 +10,13 @@ class JobController extends BaseController
 {
     public function index()
     {
-        //
+        helper('string_helper');
+
+        $jobModel = model(JobModel::class);
+
+        $data = $jobModel->findAll();
+
+        return view('joblistings/index', ['listings' => $data]);
     }
 
     public function show(string $id)
@@ -27,10 +33,46 @@ class JobController extends BaseController
     public function create()
     {
         helper('form');
-        return view('joblistings/create.php');
+        $session = session();
+        $errors = $session->get('errors');
+        return view('joblistings/create.php', ['errors' => $errors]);
     }
 
-    public function store() {
-        
+    public function store()
+    {
+        helper('string_helper');
+        helper('form');
+        $session = session();
+
+
+        $incomingData = $this->request->getPost([
+            'title',
+            'description',
+            'salary',
+            'requirements',
+            'benefits',
+            'company',
+            'address',
+            'city',
+            'state',
+            'phone',
+            'email',
+        ]);
+
+        if (!$this->validateData($incomingData, 'jobPost')) {
+            $errors = $this->validator->getErrors();
+
+            return redirect()->to('/jobs/create')->with('errors', $errors);
+        }
+
+        $jobData = $this->validator->getValidated();
+
+        $jobData['user_id'] = $session->get('user')['id'];
+
+        $jobModel = model(JobModel::class);
+
+        $jobModel->save($jobData);
+
+        return redirect()->to('/jobs')->with('success_message', 'Job Added Successfully');
     }
 }

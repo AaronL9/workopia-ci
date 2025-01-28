@@ -49,7 +49,7 @@ class UserController extends BaseController
             return redirect()->to('/');
         }
 
-        return $this->login(['error' => 'Invalid credentials']);
+        return $this->login(['errors' => 'Invalid credentials']);
     }
 
     public function create()
